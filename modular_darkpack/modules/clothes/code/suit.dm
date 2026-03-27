@@ -279,7 +279,7 @@
 	desc = "True clothing for any punk. Provides some kind of protection."
 	icon_state = "jacket1"
 	armor_type = /datum/armor/vampire_jacket
-
+//TFN EDIT START
 /obj/item/clothing/suit/vampire/jacket/red
 	name = "red leather jacket"
 	icon_state = "jacket3"
