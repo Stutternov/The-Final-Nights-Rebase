@@ -135,3 +135,5 @@
 		for(var/obj/item/bodypart/limb as anything in carbon_owner.bodyparts)
 			if(istype(limb, /obj/item/bodypart/arm))
 				limb.unarmed_sharpness = initial(limb.unarmed_sharpness)
+// TFN EDIT END
+
