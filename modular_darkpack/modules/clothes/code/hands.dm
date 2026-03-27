@@ -80,7 +80,7 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
 	resistance_flags = NONE
-
+// TFN EDIT START
 /obj/item/clothing/gloves/vampire/brassknuckles
 	name = "brass knuckles"
 	desc = "A set of tarnished brass rings fused together to create a cruel weapon for back-alley brawls. Illegal in most places."
