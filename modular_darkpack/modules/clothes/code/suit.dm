@@ -291,6 +291,7 @@
 /obj/item/clothing/suit/vampire/jacket/cropped/red
 	name = "cropped red leather jacket"
 	icon_state = "jacket3_cut"
+// TFN EDIT END
 
 /datum/armor/vampire_jacket
 	melee = 25
