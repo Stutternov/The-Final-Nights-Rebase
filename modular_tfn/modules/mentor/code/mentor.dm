@@ -99,7 +99,7 @@ GLOBAL_PROTECT(mentor_href_token)
 			log_sql("Error loading mentors from database. Loading from backup.")
 			dbfail = TRUE
 		else
-			while(query_load_mentors.NextRow())
+			if(query_load_mentors.NextRow())
 				var/mentor_ckey = ckey(query_load_mentors.item[1])
 				if(GLOB.mentor_datums[mentor_ckey])
 					continue
