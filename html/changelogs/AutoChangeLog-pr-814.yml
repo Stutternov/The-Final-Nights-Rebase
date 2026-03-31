@@ -1,5 +1,0 @@
-author: "chazzyjazzy"
-delete-after: True
-changes:
-  - rscadd: "Adds level two Thaumaturgy Burning Blade ritual"
-  - bugfix: "fixes ritual drawing actions having level = 1 when people had higher levels selected"
