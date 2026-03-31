@@ -11,6 +11,7 @@
 	value = -8
 	hardcore_value = 6
 	quirk_flags = QUIRK_PROCESSES
+	darkpack_allowed = TRUE
 	mob_trait = TRAIT_SHIFTY_EYES // they're deranged, so give them the trait that tells people around them about their crazy eyes
 	mail_goodies = list(/obj/effect/spawner/random/contraband/narcotics) // happy pills! :)
 	var/process_interval = 3 SECONDS
