@@ -7796,7 +7796,11 @@
 #include "modular_tfn\modules\mentor\code\mentorpm.dm"
 #include "modular_tfn\modules\mentor\code\mentorsay.dm"
 #include "modular_tfn\modules\mentor\code\mentorwho.dm"
+#include "modular_tfn\master_files\code\modules\fishing\sources\subtypes\turfs.dm"
+#include "modular_tfn\modules\fishing\code\fishing.dm"
+#include "modular_tfn\modules\fishing\code\store_overrides.dm"
 #include "modular_tfn\modules\powers\code\admin_discipline_editor.dm"
+#include "modular_tfn\modules\skillcheck\code\skillcheck.dm"
 #include "modular_tfn\modules\unit_tests\_tfn_unit_tests.dm"
 #include "modular_tfn\modules\vampire_the_masquerade\code\vampire_clan\trusted_whitelist.dm"
 // END_INCLUDE
