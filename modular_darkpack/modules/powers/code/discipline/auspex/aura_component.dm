@@ -23,7 +23,7 @@
 /datum/component/aura
 	// A list of currently selected emotions by the player
 	var/current_aura = AURA_INNOCENT
-	var/current_emotion_name = "Innocent"
+	var/current_emotion_name = ""
 	var/obj/effect/abstract/shared_particle_holder/aura_smoke
 	var/examine_message = ""
 	var/obj/effect/aura_overlay/aura_glow_image
