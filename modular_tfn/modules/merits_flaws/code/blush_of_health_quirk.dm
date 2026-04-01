@@ -10,5 +10,5 @@
 
 /datum/quirk/darkpack/blush_of_health/add_to_holder(mob/living/new_holder, quirk_transfer, client/client_source, unique, announce)
 	. = ..()
-	if(!.)
+	if(. == FALSE)
 		return

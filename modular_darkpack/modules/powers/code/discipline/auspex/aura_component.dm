@@ -83,11 +83,14 @@
 
 /datum/component/aura/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-	if(!examine_message)
-		return
 	var/datum/atom_hud/data/auspex_aura/auspex_hud = GLOB.huds[DATA_HUD_AUSPEX_AURAS]
 	if(!(user in auspex_hud.hud_users_all_z_levels))
 		return
+	// TFN EDIT START - avoid stale aura examine messages
+	update_examine_message(null)
+	if(!examine_message)
+		return
+	// TFN EDIT END
 	examine_list += examine_message
 
 /datum/component/aura/proc/update_examine_message(mutable_appearance/aura_appearance)

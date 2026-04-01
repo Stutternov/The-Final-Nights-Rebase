@@ -10,7 +10,7 @@
 
 /datum/quirk/darkpack/eat_food/add_to_holder(mob/living/new_holder, quirk_transfer, client/client_source, unique, announce)
 	. = ..()
-	if(!.)
+	if(. == FALSE)
 		return
 
 	if(ishuman(new_holder))
