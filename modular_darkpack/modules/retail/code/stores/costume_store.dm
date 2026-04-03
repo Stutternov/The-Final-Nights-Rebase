@@ -23,4 +23,10 @@
 		new /datum/data/vending_product("comedy mask", /obj/item/clothing/mask/vampire/comedy, 25),
 		new /datum/data/vending_product("tragedy mask", /obj/item/clothing/mask/vampire/tragedy, 25),
 		new /datum/data/vending_product("shemagh", /obj/item/clothing/mask/vampire/shemagh, 20),
+		new /datum/data/vending_product("right eyepatch", /obj/item/clothing/glasses/vampire/eyepatch, 25),
+		new /datum/data/vending_product("left eyepatch", /obj/item/clothing/glasses/vampire/eyepatch/left, 25),
+		new /datum/data/vending_product("right medical eyepatch", /obj/item/clothing/glasses/vampire/eyepatch/white, 25),
+		new /datum/data/vending_product("left medical eyepatch", /obj/item/clothing/glasses/vampire/eyepatch/white_left, 25),
+		new /datum/data/vending_product("white veil", /obj/item/clothing/glasses/vampire/veil, 25),
+		new /datum/data/vending_product("black veil", /obj/item/clothing/glasses/vampire/veil/black, 25),
 	)
