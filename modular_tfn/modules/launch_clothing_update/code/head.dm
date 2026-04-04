@@ -61,3 +61,5 @@
 	desc = "A fancy black headdress. Mysterious!"
 	icon_state = "blackngoldheaddress"
 	LCU_HEAD_ICONS
+
+#undef LCU_HEAD_ICONS
