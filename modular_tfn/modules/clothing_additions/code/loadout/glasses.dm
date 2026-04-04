@@ -1,6 +1,6 @@
 // Loadout stuff
 // Aviators
-/datum/loadout_item/glasses/aviator
+/datum/loadout_item/glasses/aviator/
 	name = "Aviators"
 	item_path = /obj/item/clothing/glasses/vampire/aviator
 
@@ -37,11 +37,11 @@
 //Other Glasses
 /datum/loadout_item/glasses/bicolor
 	name = "Bicolor Glasses"
-	item_path = /obj/item/clothing/glasses/vampire/bicolor
+	item_path = /obj/item/clothing/glasses/vampire/misc/bicolor
 
 /datum/loadout_item/glasses/safety
 	name = "Safety Goggles"
-	item_path = /obj/item/clothing/glasses/vampire/safety
+	item_path = /obj/item/clothing/glasses/vampire/misc/safety
 
 // Misc Eyewear
 /datum/loadout_item/glasses/misc
@@ -50,24 +50,24 @@
 
 /datum/loadout_item/glasses/misc/eyepatch
 	name = "Right Eyepatch"
-	item_path = /obj/item/clothing/glasses/vampire/eyepatch
+	item_path = /obj/item/clothing/glasses/vampire/misc/eyepatch
 
 /datum/loadout_item/glasses/misc/eyepatch/left
 	name = "Left Eyepatch"
-	item_path = /obj/item/clothing/glasses/vampire/eyepatch/left
+	item_path = /obj/item/clothing/glasses/vampire/misc/eyepatch/left
 
-/datum/loadout_item/glasses/misc/eyepatch/white
+/datum/loadout_item/glasses/misc/eyepatch/medical
 	name = "Right Medical Eyepatch"
-	item_path = /obj/item/clothing/glasses/vampire/eyepatch/white
+	item_path = /obj/item/clothing/glasses/vampire/misc/eyepatch/medical
 
-/datum/loadout_item/glasses/misc/eyepatch/white_left
+/datum/loadout_item/glasses/misc/eyepatch/medical_left
 	name = "Left Medical Eyepatch"
-	item_path = /obj/item/clothing/glasses/vampire/eyepatch/white_left
+	item_path = /obj/item/clothing/glasses/vampire/misc/eyepatch/medical_left
 
 /datum/loadout_item/glasses/misc/veil
 	name = "White Veil"
-	item_path = /obj/item/clothing/glasses/vampire/veil
+	item_path = /obj/item/clothing/glasses/vampire/misc/veil
 
 /datum/loadout_item/glasses/misc/veil/black
 	name = "Black Veil"
-	item_path = /obj/item/clothing/glasses/vampire/veil/black
+	item_path = /obj/item/clothing/glasses/vampire/misc/veil/black

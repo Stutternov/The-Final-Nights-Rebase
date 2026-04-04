@@ -22,11 +22,11 @@
 
 /datum/loadout_item/head/picture
 	name = "Picture Hat"
-	item_path = /obj/item/clothing/head/vampire/picture
+	item_path = /obj/item/clothing/head/vampire/hat/picture
 
 /datum/loadout_item/head/picture/red
 	name = "Red Picture Hat"
-	item_path = /obj/item/clothing/head/vampire/picture/red
+	item_path = /obj/item/clothing/head/vampire/hat/picture/red
 
 //Costume Headwear
 /datum/loadout_item/head/costume
