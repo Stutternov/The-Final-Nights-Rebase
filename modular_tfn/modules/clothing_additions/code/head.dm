@@ -1,19 +1,18 @@
-#define LCU_HEAD_ICONS \
-	icon = 'modular_tfn/modules/launch_clothing_update/icons/clothing.dmi'; \
-	worn_icon = 'modular_tfn/modules/launch_clothing_update/icons/worn.dmi'; \
-	ONFLOOR_ICON_HELPER('modular_tfn/modules/launch_clothing_update/icons/onfloor.dmi')
+#define CLOTHING_HEAD_ICONS \
+	icon = 'modular_tfn/modules/clothing_additions/icons/clothing.dmi'; \
+	worn_icon = 'modular_tfn/modules/clothing_additions/icons/worn.dmi'; \
+	ONFLOOR_ICON_HELPER('modular_tfn/modules/clothing_additions/icons/onfloor.dmi')
 
 /obj/item/clothing/head/vampire
 	abstract_type = /obj/item/clothing/head/vampire
 
 /obj/item/clothing/head/vampire/hat
-	LCU_HEAD_ICONS
+	CLOTHING_HEAD_ICONS
 
 /obj/item/clothing/head/vampire/hat/bucket
 	name = "bucket hat"
 	desc = "Music festival high fashion."
 	icon_state = "bucket_hat"
-	flags_cover = HEADCOVERSEYES //Clothing previously had this flag, check if we want to actually keep it? - STOPS KIASYD FROM BREACHING
 
 /obj/item/clothing/head/vampire/hat/boater
 	name = "boater hat"
@@ -29,21 +28,19 @@
 	name = "white wool hat"
 	desc = "Knitted for those cold, chilly nights."
 	icon_state = "woolhat"
-	LCU_HEAD_ICONS
 
 /obj/item/clothing/head/vampire/hat/wool/blue
 	name = "blue and white wool hat"
 	desc = "Knitted for those cold, chilly nights."
 	icon_state = "woolhat_blue"
 
-/obj/item/clothing/head/vampire/picture
+/obj/item/clothing/head/vampire/hat/picture
 	name = "picture hat"
 	desc = "An old-fashioned hat with a brim low enough to cover your eyes."
 	icon_state = "picture"
-	flags_cover = HEADCOVERSEYES //Clothing previously had this flag, check if we want to actually keep it? - STOPS KIASYD FROM BREACHING
-	LCU_HEAD_ICONS
+	flags_cover = HEADCOVERSEYES //Covers our eyes, stops breaching from Kiasyd. Reconsider if sprite/description changes.
 
-/obj/item/clothing/head/vampire/picture/red
+/obj/item/clothing/head/vampire/hat/picture/red
 	name = "red picture hat"
 	desc = "An old-fashioned hat with a brim low enough to cover your eyes."
 	icon_state = "picture_red"
@@ -54,12 +51,12 @@
 	name = "frilly headband"
 	desc = "A headband made of white frills and black bows. Maidenly!"
 	icon_state = "frilly_headband"
-	LCU_HEAD_ICONS
+	CLOTHING_HEAD_ICONS
 
 /obj/item/clothing/head/vampire/headdress_black
 	name = "black headdress"
 	desc = "A fancy black headdress. Mysterious!"
-	icon_state = "blackngoldheaddress"
-	LCU_HEAD_ICONS
+	icon_state = "black_headdress"
+	CLOTHING_HEAD_ICONS
 
-#undef LCU_HEAD_ICONS
+#undef CLOTHING_HEAD_ICONS

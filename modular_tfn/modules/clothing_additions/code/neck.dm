@@ -1,13 +1,13 @@
-#define LCU_NECK_ICONS \
-	icon = 'modular_tfn/modules/launch_clothing_update/icons/clothing.dmi'; \
-	worn_icon = 'modular_tfn/modules/launch_clothing_update/icons/worn.dmi'; \
-	ONFLOOR_ICON_HELPER('modular_tfn/modules/launch_clothing_update/icons/onfloor.dmi')
+#define CLOTHING_NECK_ICONS \
+	icon = 'modular_tfn/modules/clothing_additions/icons/clothing.dmi'; \
+	worn_icon = 'modular_tfn/modules/clothing_additions/icons/worn.dmi'; \
+	ONFLOOR_ICON_HELPER('modular_tfn/modules/clothing_additions/icons/onfloor.dmi')
 
 /obj/item/clothing/neck/vampire/choker
 	name = "black choker"
 	desc = "A plain black choker. Popular with goths!"
 	icon_state = "choker_black"
-	LCU_NECK_ICONS
+	CLOTHING_NECK_ICONS
 
 /obj/item/clothing/neck/vampire/choker/metal
 	name = "metallic choker"
@@ -28,4 +28,4 @@
 	name = "fancy choker"
 	desc = "A black choker with a gold ring pendant. A little classier than the alternatives."
 	icon_state = "choker_fancy"
-#undef LCU_NECK_ICONS
+#undef CLOTHING_NECK_ICONS
