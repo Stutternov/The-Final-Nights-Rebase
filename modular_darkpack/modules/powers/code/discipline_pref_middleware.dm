@@ -310,10 +310,11 @@ GLOBAL_LIST_INIT(rare_discipline_types, list(
 			if(!result)
 				character.give_st_power(discipline, level) // load em up
 
-	SSticker.OnRoundend(CALLBACK(src, PROC_REF(save_disciplines), character))
+	SSticker.OnRoundend(CALLBACK(src, PROC_REF(save_disciplines), WEAKREF(character)))
 
-/datum/preferences/proc/save_disciplines(mob/living/carbon/human/character)
-	if(QDELETED(character))
+/datum/preferences/proc/save_disciplines(datum/weakref/character_weakref)
+	var/mob/living/carbon/human/character = character_weakref.resolve()
+	if(!character)
 		return
 
 	var/datum/splat/vampire/vampire_splat = get_splat_with_discipline(character)
