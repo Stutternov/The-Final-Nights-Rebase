@@ -103,10 +103,12 @@
 		return
 
 	var/obj/speaker = pick_weight(objects)
-	var/speech = spooky_font_replace(pick(audible_hallucinations))
+	var/raw_speech = pick(audible_hallucinations)
+	var/sound_file = audible_hallucinations[raw_speech]
+	var/speech = spooky_font_replace(raw_speech)
 	var/language = hallucinator.get_random_understood_language()
 	var/message = hallucinator.compose_message(speaker, language, speech)
-	hallucinator.playsound_local(hallucinator, audible_hallucinations[speech], vol = 20, vary = TRUE)
+	hallucinator.playsound_local(hallucinator, sound_file, vol = 20, vary = TRUE)
 	if(hallucinator.client.prefs.read_preference(/datum/preference/toggle/see_rc_emotes))
 		hallucinator.create_chat_message(speaker, language, speech, spans = list("italics"))
 	to_chat(hallucinator, span_cult_italic(message))
