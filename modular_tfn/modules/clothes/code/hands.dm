@@ -19,8 +19,8 @@
 		var/mob/living/carbon/carbon_owner = user
 		for(var/obj/item/bodypart/limb as anything in carbon_owner.bodyparts)
 			if(istype(limb, /obj/item/bodypart/arm))
-				limb.unarmed_damage_low += 5
-				limb.unarmed_damage_high += 5
+				limb.unarmed_damage_low += 10
+				limb.unarmed_damage_high += 10
 				limb.unarmed_effectiveness += 5
 				limb.unarmed_pummeling_bonus += 0.5
 				to_chat(user, span_notice("You fit your fingers into the brass knuckle's loops.."))
@@ -31,8 +31,8 @@
 		var/mob/living/carbon/carbon_owner = user
 		for(var/obj/item/bodypart/limb as anything in carbon_owner.bodyparts)
 			if(istype(limb, /obj/item/bodypart/arm))
-				limb.unarmed_damage_low -= 5
-				limb.unarmed_damage_high -= 5
+				limb.unarmed_damage_low -= 10
+				limb.unarmed_damage_high -= 10
 				limb.unarmed_effectiveness -= 5
 				limb.unarmed_pummeling_bonus -= 0.5
 				to_chat(user, span_notice("You take off the brass knuckles.."))
