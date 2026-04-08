@@ -182,7 +182,9 @@
 
 // the random hallucination type will store overrides and extensions of basegame hallucinations, as well as untouched basegame hallucinations like eyes_in_the_dark
 /datum/hallucination/malk/random
+
 // TFN EDIT START
+
 /datum/hallucination/malk/random/proc/get_random_malk_hallucination()
 	var/static/list/uncommon_hallucinations = list(/datum/hallucination/your_mother/malk, /datum/hallucination/blood_flow/malk)
 	var/static/list/common_hallucinations = list(/datum/hallucination/eyes_in_dark) + subtypesof(/datum/hallucination/body)
