@@ -1,5 +1,8 @@
 //Loadout Stuff
 //Hats
+/datum/loadout_item/head/hat
+	abstract_type = /datum/loadout_item/head/hat
+
 /datum/loadout_item/head/hat/bucket
 	name = "Bucket Hat"
 	item_path = /obj/item/clothing/head/vampire/hat/bucket
@@ -17,15 +20,15 @@
 	item_path = /obj/item/clothing/head/vampire/hat/wool
 
 /datum/loadout_item/head/hat/wool/blue
-	name = "Blue and White Wool Hat"
+	name = "Wool Hat (Blue and White)"
 	item_path = /obj/item/clothing/head/vampire/hat/wool/blue
 
-/datum/loadout_item/head/picture
+/datum/loadout_item/head/hat/picture
 	name = "Picture Hat"
 	item_path = /obj/item/clothing/head/vampire/hat/picture
 
-/datum/loadout_item/head/picture/red
-	name = "Red Picture Hat"
+/datum/loadout_item/head/hat/picture/red
+	name = "Picture Hat (Red)"
 	item_path = /obj/item/clothing/head/vampire/hat/picture/red
 
 //Costume Headwear
