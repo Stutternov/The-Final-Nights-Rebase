@@ -97,6 +97,12 @@
 /obj/machinery/radio_tranceiver/police/proc/crime_reported(datum/source, crime, turf/location)
 	SIGNAL_HANDLER
 
+	// TFN EDIT START - no more deathmatch gunshots
+	var/area/crime_area = get_area(location)
+	if(crime_area?.area_flags & QUIET_LOGS)
+		return
+	// TFN EDIT END
+
 	if(crime == CRIME_EMERGENCY) // Bypasses cooldown because of gameplay reasons.
 		radio.talk_into(radio, span_red("406 - EMERGENCY - BACKUP REQUIRED AT: [english_list(list(location.x, location.y, location.z, get_area_name(location, TRUE)), and_text = ", ")]."), FREQ_POLICE, list(SPAN_ROBOT, SPAN_COMMAND))
 
