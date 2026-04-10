@@ -236,6 +236,17 @@
 		alist(NETWORK_ID = VAMPIRE_LEADER_NETWORK, OUR_ROLE = "Gym Manager", USE_JOB_TITLE = FALSE)
 		)
 //TFN EDIT ADD END
+//TFN EDIT ADD START - Clinic Phones
+/obj/item/smartphone/doctor
+	contact_networks_pre_init = list(
+		alist(NETWORK_ID = CLINIC_NETWORK, OUR_ROLE = "Doctor", USE_JOB_TITLE = TRUE)
+		)
+
+/obj/item/smartphone/doctor/director
+	contact_networks_pre_init = list(
+		alist(NETWORK_ID = CLINIC_NETWORK, OUR_ROLE = "Clinic Director", USE_JOB_TITLE = TRUE)
+		)
+//TFN EDIT ADD END
 #undef NETWORK_ID
 #undef OUR_ROLE
 #undef USE_JOB_TITLE
