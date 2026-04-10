@@ -75,7 +75,6 @@
 	data["nsfw_content"] = nsfw_content ? TRUE : FALSE
 
 	data["has_theme"] = has_theme	//TFN EDIT- CHARACTER THEME
-	data["is_playing"] = is_playing
 
 	return data
 
