@@ -8,6 +8,8 @@
 	/// Mob that the examine panel belongs to.
 	var/mob/living/carbon/holder
 
+	var/is_playing	//TFN EDIT - CHARACTER THEME
+
 /datum/examine_panel/ui_state(mob/user)
 	return GLOB.always_state
 
@@ -26,6 +28,12 @@
 	var/obscured
 	var/name = ""
 	var/headshot = ""
+
+	//TFN EDIT START - CHARACTER THEME
+	var/theme_url
+	var/has_theme = FALSE
+	//TFN EDIT END
+
 	// Whether or not the viewing user wants to see potential NSFW content in the holder's examine panel
 	var/nsfw_content = user.client?.prefs.read_preference(/datum/preference/toggle/nsfw_content_pref)
 	var/flavor_text_nsfw = ""
@@ -38,6 +46,7 @@
 
 		//Check if the mob is obscured, then continue to headshot
 		if(isobserver(user) || show_flavor_text_when_masked || !obscured)
+			theme_url = holder_human.dna.features[EXAMINE_DNA_THEME]
 			headshot = holder_human.dna.features[EXAMINE_DNA_HEADSHOT]
 			flavor_text = holder_human.dna.features[EXAMINE_DNA_FLAVOR_TEXT]
 			flavor_text_nsfw = holder.dna.features[EXAMINE_DNA_NSFW_FLAVOR_TEXT]
@@ -51,6 +60,11 @@
 			ooc_notes = "Obscured"
 			name = "Unknown"
 
+	//TFN EDIT START - CHARACTER THEME
+	if(theme_url)
+		has_theme = TRUE
+	//TFN EDIT END
+
 	data["obscured"] = obscured ? TRUE : FALSE
 	data["character_name"] = name
 	data["flavor_text"] = flavor_text
@@ -59,6 +73,10 @@
 	data["character_notes"] = character_notes
 	data["headshot"] = headshot
 	data["nsfw_content"] = nsfw_content ? TRUE : FALSE
+
+	data["has_theme"] = has_theme	//TFN EDIT- CHARACTER THEME
+	data["is_playing"] = is_playing
+
 	return data
 
 /mob/living/carbon/proc/flavor_text_creation()
@@ -75,3 +93,41 @@
 	if(href_list["view_flavortext"])
 		examine_panel_tgui.ui_interact(usr)
 	. = ..()
+
+/datum/examine_panel/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+
+	if(.)
+		return
+
+	var/client/C
+	var/web_sound_url
+	var/artist_name = "Song Artist Hidden"
+	var/theme_title
+	var/list/music_extra_data = list()
+
+	if(ishuman(holder))
+		web_sound_url = holder.dna.features[EXAMINE_DNA_THEME]
+		if(holder.dna.features[EXAMINE_DNA_THEME_ARTIST])
+			artist_name = holder.dna.features[EXAMINE_DNA_THEME_ARTIST]
+		theme_title = holder.dna.features[EXAMINE_DNA_THEME_TITLE]
+
+	if(!C || !web_sound_url)
+		return
+
+	if(!web_sound_url)
+		return
+
+	switch(action)
+		if("toggle")
+			if(!is_playing)
+				is_playing = TRUE
+				music_extra_data["link"] = web_sound_url
+				music_extra_data["title"] = theme_title
+				music_extra_data["duration"] = "Song Duration Hidden"
+				music_extra_data["artist"] = artist_name
+				C.tgui_panel?.play_music(web_sound_url, music_extra_data)
+			else
+				is_playing = FALSE
+				C.tgui_panel?.stop_music()
+			return TRUE

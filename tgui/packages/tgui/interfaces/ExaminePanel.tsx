@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { resolveAsset } from '../assets';
 import { useBackend } from '../backend';
-import { Section, Stack, Tabs, Box } from 'tgui-core/components';
+import { Section, Stack, Tabs, Box, Button } from 'tgui-core/components';
 import type { BooleanLike } from 'tgui-core/react';
 import { Window } from '../layouts';
 
@@ -16,6 +16,10 @@ type ExamineData = {
   ooc_notes: string;
   character_notes: string;
   nsfw_content: BooleanLike;
+  //TFN EDIT START - CHARACTER THEME
+  is_playing: boolean;
+  has_theme: boolean;
+  //TFN EDIT END
 }
 
 function formatURLs(text: string) {
@@ -60,13 +64,28 @@ export const ExaminePanel = (props) => {
     ooc_notes,
     character_notes,
     nsfw_content,
+    //TFN EDIT START - CHARACTER THEME
+    has_theme,
+    is_playing,
+    //TFN EDIT END
   } = data;
   return (
     <Window
       title={`${character_name}'s Examine Panel`}
       width={900}
       height={670}
-    >
+      buttons={
+      <>
+      <Button
+      color="green"
+      icon="music"
+      tooltip="Music player"
+      tooltipPosition="bottom-start"
+      onClick={() => act('toggle')}
+      disabled={!has_theme}
+      selected={!is_playing}
+      />
+      </>}>
       <Window.Content>
         <Stack fill>
           <Stack.Item>

@@ -2,6 +2,7 @@
 import {
   type Feature,
   FeatureTextInput,
+  FeatureShortTextInput,
 } from '../base';
 
 export const flavor_text: Feature<string> = {
@@ -56,4 +57,14 @@ export const background_info: Feature<string> = {
   name: 'Records (Background)',
   description: 'Only viewable by yourself and ghosts. You can have whatever you want in here - it may be valuable as a way to orient yourself to what your character is.',
   component: FeatureTextInput,
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TFN EDIT - CHARCTER THEMES
+
+export const character_theme: Feature<string> = {
+  name: 'Character Theme',
+  description: 'Requires a link ending with .mp3 and starting with https://, and hosted on Catbox.moe. Appears in corner of character tab.',
+  component: FeatureShortTextInput,
 };

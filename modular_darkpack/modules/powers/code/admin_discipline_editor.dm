@@ -70,6 +70,7 @@
 			data["immortal_age"] = target_prefs.read_preference(/datum/preference/numeric/immortal_age)
 			data["flavor_text"] = target_prefs.read_preference(/datum/preference/text/flavor_text)
 			data["headshot"] = target_prefs.read_preference(/datum/preference/text/headshot)
+			data["character_theme"] = target_prefs.read_preference(/datum/preference/text/theme)
 
 			var/splat_path = target_prefs.read_preference(/datum/preference/choiced/splats)
 			if(ispath(splat_path, /datum/splat))
