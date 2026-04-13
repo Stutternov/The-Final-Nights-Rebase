@@ -25,16 +25,18 @@
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 
 /obj/effect/mob_spawn/corpse/human/gangster_a
-	name = "Gangster"
+	name = "Thug" // replaced on spawn to include the gang name
 	outfit = /datum/outfit/gangster_a
+	facial_hairstyle = "Shaved"
 
 /obj/effect/mob_spawn/corpse/human/gangster_a/special(mob/living/carbon/human/spawned_human, mob/mob_possessor, apply_prefs)
 	. = ..()
 	spawned_human.skin_tone = pick("caucasian1", "caucasian2", "caucasian3", "latino")
 
 /obj/effect/mob_spawn/corpse/human/gangster_b
-	name = "Rival Gangster"
+	name = "Thug"
 	outfit = /datum/outfit/gangster_b
+	facial_hairstyle = "Shaved"
 
 /obj/effect/mob_spawn/corpse/human/gangster_b/special(mob/living/carbon/human/spawned_human, mob/mob_possessor, apply_prefs)
 	. = ..()
@@ -63,10 +65,10 @@
 	)
 
 /mob/living/basic/trooper/gangster/proc/find_defend_spot()
-	var/patrol_area = 2 // in tiles
+	var/patrol_area = rand(4, 8) // how close theyll get to the actual landmark before they start npc wandering
 	for(var/obj/effect/landmark/gangster_defend_area/spot in GLOB.landmarks_list)
 		var/distance = get_dist(src, spot)
-		if(distance > patrol_area)
+		if(distance > patrol_area) // when they spawn, they run over to it until they're somewhere between 4-8 tiles away from the landmark
 			ai_controller.set_blackboard_key(BB_GANGSTER_DEFEND_SPOT, spot)
 
 /mob/living/basic/trooper/gangster
@@ -97,7 +99,7 @@
 	var/casingtype = /obj/item/ammo_casing/vampire/c9mm
 	var/projectilesound = 'modular_darkpack/modules/deprecated/sounds/uzi.ogg'
 	var/burst_shots = 3
-	var/ranged_cooldown = 0.8 SECONDS
+	var/ranged_cooldown = 3 SECONDS
 
 /mob/living/basic/trooper/gangster/ranged/Initialize(mapload)
 	. = ..()
@@ -108,7 +110,6 @@
 		cooldown_time = ranged_cooldown,\
 		burst_shots = burst_shots,\
 	)
-	AddComponent(/datum/component/ranged_mob_full_auto)
 	find_defend_spot()
 
 /mob/living/basic/trooper/gangster/melee/rival

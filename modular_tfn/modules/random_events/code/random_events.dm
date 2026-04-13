@@ -3,15 +3,17 @@
 SUBSYSTEM_DEF(tfnevents)
 	name = "TFN Random Events"
 	runlevels = RUNLEVEL_GAME
-	wait = 1 MINUTES
+	wait = 10 MINUTES
 	var/next_event = 0
-	var/frequency_lower = 60 MINUTES
+	var/frequency_lower = 20 MINUTES
 	var/frequency_upper = 120 MINUTES
 	var/list/power_outage_pool = list(
 		/area/vtm/interior/police,
 		/area/vtm/interior/jazzclub,
 		/area/vtm/interior/museum,
 		/area/vtm/interior/bianchiBank,
+		/area/vtm/interior/clinic,
+		/area/vtm/interior/techshop
 	)
 
 /datum/controller/subsystem/tfnevents/Initialize()
@@ -59,20 +61,20 @@ SUBSYSTEM_DEF(tfnevents)
 	var/list/spawns_a = list()
 	var/list/spawns_b = list()
 	var/list/gang_names = list(
-		"38th Street Gang",
-		"The Avenues",
-		"Forming Kaos",
-		"Azusa 13",
-		"Varrio Nuevo Estrada",
-		"Venice 13",
-		"Westside Locos 13",
-		"Wilmas 13",
-		"Vagos Motorcycle Club",
-		"Varrio 204th Street",
-		"Yakuza",
+		"Three Fifths",
+		"The Boulevards",
+		"Bay Bikers",
+		"Bay Area 13",
+		"Red 7",
+		"Baywalk Club",
+		"Jets",
+		"Bluejays",
+		"Terror Time",
+		"Factory 13",
+		"Bay Block Warehouse",
 	)
 	var/list/warning = list("Watch out bay area", "BREAKING", "CRIME WATCH", "Holy shit", "Wow")
-	var/list/random_description = list("declared war on", "is beefing with", "said they are going to kill", "publicly declared their intent to wipe out")
+	var/list/random_description = list("declared war on", "is beefing with", "said they are going to kill", "publicly declared their intent to wipe out", "is squaring up with")
 	for(var/obj/effect/landmark/L in GLOB.landmarks_list)
 		if(istype(L, /obj/effect/landmark/gangster_spawn/a))
 			spawns_a += L
@@ -83,27 +85,35 @@ SUBSYSTEM_DEF(tfnevents)
 		message_admins("ERROR: Turfwar event called but gangster spawn landmarks are missing.")
 		return
 
-	var/a_count = rand(5, 10)
+	var/gang_a_name = pick(gang_names)
+	var/gang_b_name = pick(gang_names - gang_a_name)
+
+	var/a_count = rand(1, 5)
 	for(var/i in 1 to a_count)
 		var/obj/effect/landmark/gangster_spawn/a/entry_point = pick(spawns_a)
-		if(prob(50))
-			new /mob/living/basic/trooper/gangster/ranged(entry_point.loc)
+		var/mob/living/basic/trooper/gangster/spawned
+		if(prob(15))
+			spawned = new /mob/living/basic/trooper/gangster/ranged(entry_point.loc)
 		else
-			new /mob/living/basic/trooper/gangster/melee(entry_point.loc)
+			spawned = new /mob/living/basic/trooper/gangster/melee(entry_point.loc)
+		spawned.name = "[gang_a_name] [pick("Thug", "Gangster", "Bruiser", "Recruit")]"
 
-	var/b_count = rand(5, 10)
+	var/b_count = rand(1, 5)
 	for(var/i in 1 to b_count)
 		var/obj/effect/landmark/gangster_spawn/b/entry_point = pick(spawns_b)
-		if(prob(50))
-			new /mob/living/basic/trooper/gangster/ranged/rival(entry_point.loc)
+		var/mob/living/basic/trooper/gangster/rival_spawned
+		if(prob(15))
+			rival_spawned = new /mob/living/basic/trooper/gangster/ranged/rival(entry_point.loc)
 		else
-			new /mob/living/basic/trooper/gangster/melee/rival(entry_point.loc)
-	endpost_announce("[pick(warning)], [pick(gang_names)] [pick(random_description)] [pick(gang_names)].")
+			rival_spawned = new /mob/living/basic/trooper/gangster/melee/rival(entry_point.loc)
+		rival_spawned.name = "[gang_b_name] [pick("Thug", "Gangster", "Bruiser", "Recruit")]"
 
-ADMIN_VERB(debug_run_power_outage_event, R_ADMIN, "Debug: Power Outage Event", "Manually trigger the power outage random event.", "OOC")
+	endpost_announce("[pick(warning)], [gang_a_name] [pick(random_description)] [gang_b_name].", pick("friedman1990", "mel0nman","y3ll0wgl0v3s","d3bofn1ght"))
+
+ADMIN_VERB(debug_run_power_outage_event, R_ADMIN, "Trigger Random Power Outage Event", "Manually trigger the power outage random event.", ADMIN_CATEGORY_SECOND_CITY)
 	SStfnevents.run_power_outage_event()
 	message_admins("[key_name_admin(user)] manually triggered the power outage event.")
 
-ADMIN_VERB(debug_run_turfwar_event, R_ADMIN, "Debug: Turfwar Event", "Manually trigger the turfwar random event.", "OOC")
+ADMIN_VERB(debug_run_turfwar_event, R_ADMIN, "Trigger Turfwar Event", "Manually trigger the turfwar event.", ADMIN_CATEGORY_SECOND_CITY)
 	SStfnevents.run_turfwar_event()
 	message_admins("[key_name_admin(user)] manually triggered the turfwar event.")
