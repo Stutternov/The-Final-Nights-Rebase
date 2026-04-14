@@ -4,14 +4,14 @@
 #define CHOICE_NO "No Extension"
 
 /datum/vote/extend_night
-	name = "Extend Night"
+	name = "Extend the Round"
 	default_choices = list(
 		CHOICE_15,
 		CHOICE_30,
 		CHOICE_60,
 		CHOICE_NO
 	)
-	default_message = "Vote to extend the night by a given amount."
+	default_message = "Vote to extend the round by a given amount. Note this will not extend the night, but rather the daytime."
 
 /datum/vote/extend_night/can_be_initiated(forced)
 	. = ..()
@@ -21,8 +21,8 @@
 	if(forced)
 		return VOTE_AVAILABLE
 
-	if(SScity_time.daytime_started)
-		return "The night has already ended."
+	if(SScity_time.roundend_started)
+		return "The round has already ended."
 
 	return VOTE_AVAILABLE
 

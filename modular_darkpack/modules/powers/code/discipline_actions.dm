@@ -9,7 +9,7 @@
 	var/datum/discipline/discipline
 	var/targeting = FALSE
 
-/datum/action/discipline/New(datum/discipline/discipline)
+/datum/action/discipline/New(Target, datum/discipline/discipline)
 	. = ..()
 
 	src.discipline = discipline
@@ -47,7 +47,6 @@
 			SIGNAL_ADDTRAIT(TRAIT_PACIFISM),
 			SIGNAL_REMOVETRAIT(TRAIT_PACIFISM),
 		))
-	discipline = null
 	return ..()
 
 /datum/action/discipline/proc/register_to_availability_signals()
@@ -87,7 +86,7 @@
 	owner.update_action_buttons()
 
 /datum/action/discipline/IsAvailable(feedback)
-	return discipline.current_power.can_activate_untargeted(feedback)
+	return discipline?.current_power?.can_activate_untargeted(feedback)
 
 /datum/action/discipline/Trigger(trigger_flags)
 	. = ..()

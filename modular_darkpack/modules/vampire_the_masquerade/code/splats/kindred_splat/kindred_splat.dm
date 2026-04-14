@@ -93,6 +93,7 @@
 	owner.physiology.cold_mod *= 0.25
 
 /datum/splat/vampire/kindred/on_lose()
+	owner.remove_st_power(/datum/discipline/bloodheal)
 	owner.set_clan(null)
 
 	UnregisterSignal(owner, list(
