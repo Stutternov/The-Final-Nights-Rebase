@@ -58,6 +58,8 @@ SUBSYSTEM_DEF(tfnevents)
 	endpost_announce("Reports of power outages in [target_area.name]. Bring wirecutters if you want to help.", "SF Grid Watchers")
 
 /datum/controller/subsystem/tfnevents/proc/run_turfwar_event()
+	if(length(GLOB.living_turfwar_npcs))
+		return
 	var/list/spawns_a = list()
 	var/list/spawns_b = list()
 	var/list/gang_names = list(
@@ -97,6 +99,7 @@ SUBSYSTEM_DEF(tfnevents)
 		else
 			spawned = new /mob/living/basic/trooper/gangster/melee(entry_point.loc)
 		spawned.name = "[gang_a_name] [pick("Thug", "Gangster", "Bruiser", "Recruit")]"
+		SSpoints_of_interest.make_point_of_interest(spawned)
 
 	var/b_count = rand(1, 5)
 	for(var/i in 1 to b_count)
@@ -107,6 +110,7 @@ SUBSYSTEM_DEF(tfnevents)
 		else
 			rival_spawned = new /mob/living/basic/trooper/gangster/melee/rival(entry_point.loc)
 		rival_spawned.name = "[gang_b_name] [pick("Thug", "Gangster", "Bruiser", "Recruit")]"
+		SSpoints_of_interest.make_point_of_interest(rival_spawned)
 
 	endpost_announce("[pick(warning)], [gang_a_name] [pick(random_description)] [gang_b_name].", pick("friedman1990", "mel0nman","y3ll0wgl0v3s","d3bofn1ght"))
 
