@@ -10164,10 +10164,6 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/prison)
-"SM" = (
-/obj/transfer_point_vamp/backrooms/map,
-/turf/open/floor/carpet,
-/area/awaymission/errorroom)
 "SN" = (
 /obj/item/trash/popcorn{
 	pixel_y = 15;
@@ -13391,7 +13387,7 @@ aa
 LW
 ik
 LV
-SM
+LV
 LV
 LV
 LV
