@@ -113,6 +113,11 @@ GLOBAL_LIST_EMPTY(living_turfwar_npcs)
 	attack_sound = 'sound/items/weapons/genhit3.ogg'
 	r_hand = /obj/item/melee/baseball_bat/vamp
 
+/mob/living/basic/trooper/gangster/melee/Initialize(mapload)
+	if(ispath(r_hand, /obj/item/melee/baseball_bat/vamp) && prob(50))
+		r_hand = /obj/item/switchblade/vamp // for variety
+	. = ..()
+
 /mob/living/basic/trooper/gangster/ranged
 	name = "Gangster"
 	ai_controller = /datum/ai_controller/basic_controller/trooper/gangster/ranged
