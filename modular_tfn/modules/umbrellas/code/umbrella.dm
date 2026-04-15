@@ -12,6 +12,7 @@
 	greyscale_config_inhand_left = /datum/greyscale_config/umbrella_inhand_left
 	greyscale_config_inhand_right = /datum/greyscale_config/umbrella_inhand_right
 	greyscale_colors = "#808080"
+	inhand_icon_state = "umbrella_closed"
 	flags_1 = IS_PLAYER_COLORABLE_1
 	var/open = FALSE
 
