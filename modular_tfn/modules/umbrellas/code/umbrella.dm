@@ -34,7 +34,7 @@
 	name = "parasol"
 	desc = "A foldable parasol."
 	icon = 'modular_tfn/modules/umbrellas/icons/umbrella.dmi'
-	icon_state = "parasol_closed"
+	icon_state = "umbrella_closed"
 	lefthand_file = 'modular_tfn/modules/umbrellas/icons/umbrella_inhand_l.dmi'
 	righthand_file = 'modular_tfn/modules/umbrellas/icons/umbrella_inhand_r.dmi'
 	w_class = WEIGHT_CLASS_TINY
