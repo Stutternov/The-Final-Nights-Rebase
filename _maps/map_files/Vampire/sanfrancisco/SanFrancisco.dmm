@@ -19415,6 +19415,11 @@
 	dir = 8
 	},
 /area/vtm)
+"eZX" = (
+/obj/effect/landmark/npcwall,
+/obj/effect/turf_decal/bordur,
+/turf/open/floor/plating/rough,
+/area/vtm/interior/ghetto)
 "fab" = (
 /turf/closed/wall/vampwall/brick_old,
 /area/vtm/interior/sewer/nosferatu_warren)
@@ -19834,6 +19839,12 @@
 /obj/item/toy/cards/deck,
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
+"feD" = (
+/obj/effect/landmark/npcwall,
+/obj/structure/chair/plastic/darkpack,
+/obj/effect/turf_decal/bordur,
+/turf/open/floor/plating/rough,
+/area/vtm/interior/ghetto)
 "feH" = (
 /obj/transfer_point_vamp/backrooms,
 /turf/open/floor/plating/stone,
@@ -66580,7 +66591,9 @@
 /area/vtm/interior/clinic/haven)
 "qTp" = (
 /obj/effect/landmark/npcwall,
-/turf/open/floor/plating/sidewalk,
+/obj/machinery/light/small/dim/directional/north,
+/obj/effect/turf_decal/bordur,
+/turf/open/floor/plating/rough,
 /area/vtm/interior/ghetto)
 "qTy" = (
 /obj/item/flashlight/lantern,
@@ -161739,7 +161752,7 @@ hke
 hke
 ffb
 jtu
-lcX
+fAa
 vZu
 giq
 pJF
@@ -161943,7 +161956,7 @@ hke
 uXR
 hke
 hke
-lcX
+fAa
 xEh
 rim
 pJF
@@ -162759,7 +162772,7 @@ ffb
 hke
 hke
 wCe
-qTp
+eZX
 vgI
 giq
 pJF
@@ -162963,7 +162976,7 @@ pgJ
 hke
 tlf
 fAa
-qTp
+feD
 xEh
 giq
 pJF
