@@ -976,7 +976,7 @@
 /turf/open/openspace,
 /area/vtm/interior/jazzclub)
 "amH" = (
-/obj/structure/vampdoor,
+/obj/structure/vampdoor/old,
 /obj/effect/mapping_helpers/door/lock,
 /obj/effect/mapping_helpers/door/lock_difficulty/six,
 /obj/effect/mapping_helpers/door/access/brujah,
@@ -52790,7 +52790,9 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "nyg" = (
-/obj/machinery/light/small/directional/east,
+/obj/machinery/light/directional/east{
+	pixel_y = 16
+	},
 /turf/open/floor/city/toilet/large,
 /area/vtm/interior/fightclub)
 "nyk" = (
