@@ -3722,14 +3722,13 @@
 /turf/open/floor/wood/rough,
 /area/vtm/outside/forest)
 "aVD" = (
-/obj/structure/closet,
-/obj/item/binoculars,
-/obj/item/vamp/keys/brujah,
-/obj/item/vamp/keys/brujah,
-/obj/item/vamp/keys/brujah,
-/obj/item/clothing/gloves/boxing/golden,
-/obj/item/clothing/gloves/vampire/tfn/brassknuckles/spiked,
+/obj/structure/table/wood,
 /obj/item/megaphone,
+/obj/item/clothing/mask/whistle{
+	name = "referee whistle";
+	pixel_y = 8;
+	pixel_x = 5
+	},
 /turf/open/floor/city/plating,
 /area/vtm/interior/fightclub)
 "aVS" = (
@@ -26488,6 +26487,10 @@
 /obj/structure/table/countertop,
 /turf/open/floor/city/factory,
 /area/vtm/interior)
+"gPW" = (
+/obj/structure/sink/basin/directional/south,
+/turf/open/floor/plating/roofwalk,
+/area/vtm)
 "gQb" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
@@ -27452,6 +27455,8 @@
 /obj/structure/closet,
 /obj/item/clothing/under/vampire/brujah,
 /obj/item/clothing/under/vampire/brujah,
+/obj/item/clothing/under/vampire/brujah/female,
+/obj/item/clothing/under/vampire/brujah/female,
 /turf/open/floor/city/plating_mono,
 /area/vtm/interior/fightclub)
 "hcg" = (
@@ -47111,9 +47116,11 @@
 /area/vtm/interior/sewer)
 "mds" = (
 /obj/structure/closet,
-/obj/item/clothing/under/vampire/brujah/female,
-/obj/item/clothing/under/vampire/brujah/female,
 /obj/structure/window/spawner/directional/north,
+/obj/item/clothing/under/vampire/sport,
+/obj/item/clothing/under/vampire/sport,
+/obj/item/clothing/suit/vampire/trackjacket/red,
+/obj/item/clothing/suit/vampire/trackjacket/blue,
 /turf/open/floor/city/plating_mono,
 /area/vtm/interior/fightclub)
 "mdt" = (
@@ -64311,9 +64318,19 @@
 /turf/open/misc/dirt,
 /area/vtm/interior/sewer)
 "qpt" = (
-/obj/structure/closet,
-/obj/item/clothing/under/vampire/sport,
-/obj/item/clothing/under/vampire/sport,
+/obj/structure/sink{
+	dir = 8;
+	pixel_x = 11
+	},
+/obj/effect/turf_decal/stock{
+	dir = 4;
+	pixel_x = -10
+	},
+/obj/effect/turf_decal/stock{
+	dir = 8;
+	pixel_x = 10;
+	pixel_y = -1
+	},
 /turf/open/floor/city/plating_mono,
 /area/vtm/interior/fightclub)
 "qpv" = (
@@ -69639,6 +69656,17 @@
 /obj/structure/chair/wood/darkpack,
 /turf/open/floor/plating/canal,
 /area/vtm/interior/sabbat_lair)
+"rJg" = (
+/obj/structure/closet,
+/obj/item/binoculars,
+/obj/item/vamp/keys/brujah,
+/obj/item/vamp/keys/brujah,
+/obj/item/vamp/keys/brujah,
+/obj/item/clothing/gloves/boxing/golden,
+/obj/item/clothing/gloves/vampire/tfn/brassknuckles/spiked,
+/obj/item/clothing/suit/vampire/trench,
+/turf/open/floor/city/plating,
+/area/vtm/interior/fightclub)
 "rJk" = (
 /obj/structure/chair/sofa/corp/right,
 /turf/open/floor/city/plating_stone,
@@ -78653,7 +78681,6 @@
 /obj/effect/turf_decal/siding/wideplating/orange{
 	dir = 5
 	},
-/obj/structure/sign/clock/directional/east,
 /turf/open/floor/carpet/darkpack/orangesilver,
 /area/vtm/interior/fightclub)
 "uaC" = (
@@ -121335,7 +121362,7 @@ uNp
 ncy
 qbM
 iKa
-odG
+rJg
 odG
 odG
 aVD
@@ -204148,7 +204175,7 @@ xEp
 ocB
 xEp
 xEp
-xEp
+gPW
 wmS
 mjT
 mjT
