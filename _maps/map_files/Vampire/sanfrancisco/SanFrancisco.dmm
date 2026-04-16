@@ -31340,19 +31340,6 @@
 	},
 /turf/open/floor/wood/smooth/old,
 /area/vtm/interior/shop)
-"iaM" = (
-/obj/effect/decal/pallet,
-/obj/structure/closet/crate/large,
-/obj/structure/closet/crate/large{
-	pixel_y = -21;
-	pixel_x = 17;
-	anchored = 1;
-	density = 0
-	},
-/turf/open/floor/plating/concrete{
-	color = "#9c8064"
-	},
-/area/vtm/interior/ghetto)
 "iaQ" = (
 /obj/structure/chair/wood/darkpack{
 	dir = 4
@@ -59679,7 +59666,6 @@
 	pixel_x = 8;
 	pixel_y = 10
 	},
-/obj/structure/table/wood/fancy/orange,
 /obj/structure/table/wood/fancy/green,
 /obj/machinery/button/door{
 	id = 1337;
@@ -68166,7 +68152,6 @@
 	pixel_y = 7;
 	pixel_x = 5
 	},
-/obj/structure/table/wood/fancy/orange,
 /obj/structure/table/wood/fancy/green,
 /obj/vampire_computer{
 	icon_state = "computerprince";
@@ -162904,7 +162889,7 @@ xEh
 hcU
 sEz
 fAa
-iaM
+pgJ
 wRE
 wRE
 dDN
