@@ -15,7 +15,7 @@
 		},
 		{
 			"type": "icon_state",
-			"icon_state": "umbrella_on",
+			"icon_state": "umbrella_open",
 			"blend_mode": "overlay",
 			"color_ids": [1]
 		}
