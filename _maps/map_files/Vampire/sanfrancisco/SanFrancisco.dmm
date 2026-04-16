@@ -12896,14 +12896,12 @@
 /turf/open/floor/wood/smooth/old,
 /area/vtm/interior/apartment)
 "dpr" = (
-/obj/structure/vampipe{
-	icon_state = "piping40"
+/obj/structure/railing{
+	dir = 1
 	},
-/obj/structure/ladder/manhole/up{
-	pixel_y = 3;
-	pixel_x = -6
+/turf/open/floor/iron/stairs/black/left{
+	dir = 8
 	},
-/turf/open/floor/plating/canalplating,
 /area/vtm/interior/sewer)
 "dpw" = (
 /obj/structure/bury_pit,
@@ -120119,7 +120117,7 @@ jsu
 hge
 efG
 kRM
-tuX
+hge
 qdK
 qdK
 qdK
@@ -120323,7 +120321,7 @@ sNl
 tHM
 vFf
 kRM
-hge
+dpr
 qdK
 dGK
 aXa
@@ -120527,7 +120525,7 @@ sNl
 aej
 vFf
 kRM
-hge
+gfY
 rBX
 tIL
 tIL
@@ -120731,7 +120729,7 @@ tuX
 aej
 vFf
 kRM
-hge
+tuX
 qdK
 rWp
 hrA
@@ -123186,21 +123184,21 @@ hQT
 hQT
 hQT
 hQT
+lEw
+hQT
+kaF
 hQT
 hQT
 hQT
 hQT
 hQT
+lEw
 hQT
 hQT
 hQT
 hQT
 hQT
-hQT
-hQT
-hQT
-hQT
-hQT
+lEw
 fpw
 xBH
 hQT
@@ -123208,7 +123206,7 @@ rex
 hQT
 fpw
 kOa
-dpr
+pOg
 hQT
 hQT
 hQT
@@ -124189,7 +124187,7 @@ tuX
 kuI
 bmy
 bmy
-bmy
+faf
 bmy
 bmy
 bmy
@@ -124197,32 +124195,32 @@ okV
 bmy
 bmy
 bmy
+faf
+bmy
+bmy
+bmy
+bmy
+bmy
+faf
 bmy
 bmy
 bmy
 bmy
 bmy
 bmy
+faf
 bmy
 bmy
 bmy
 bmy
 bmy
 bmy
+faf
 bmy
 bmy
 bmy
 bmy
-bmy
-bmy
-bmy
-bmy
-bmy
-bmy
-bmy
-bmy
-bmy
-bmy
+faf
 bmy
 okV
 bmy
