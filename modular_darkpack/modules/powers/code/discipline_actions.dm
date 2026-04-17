@@ -9,7 +9,7 @@
 	var/datum/discipline/discipline
 	var/targeting = FALSE
 
-/datum/action/discipline/New(datum/discipline/discipline)
+/datum/action/discipline/New(Target, datum/discipline/discipline)
 	. = ..()
 
 	src.discipline = discipline
@@ -26,7 +26,7 @@
 
 	register_to_availability_signals()
 
-/datum/action/discipline/Remove(mob/remove_from)
+/datum/action/discipline/Remove(mob/owner)
 	if(discipline)
 		discipline.post_loss()
 	end_targeting()
@@ -88,7 +88,7 @@
 	owner.update_action_buttons()
 
 /datum/action/discipline/IsAvailable(feedback)
-	return discipline.current_power.can_activate_untargeted(feedback)
+	return discipline?.current_power?.can_activate_untargeted(feedback)
 
 /datum/action/discipline/Trigger(trigger_flags)
 	. = ..()

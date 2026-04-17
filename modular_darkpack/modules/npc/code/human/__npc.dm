@@ -36,11 +36,11 @@
 	var/hostile = FALSE
 	var/aggressive = FALSE
 	var/last_antagonised = 0
-	var/mob/living/danger_source
+	var/datum/weakref/danger_source
 	var/obj/effect/abstract/turf_fire/afraid_of_fire
-	var/mob/living/last_attacker
+	var/datum/weakref/last_attacker
 	var/last_health = 100
-	var/mob/living/last_damager
+	var/datum/weakref/last_damager
 
 	var/turf/walktarget	//dlya movementa
 
@@ -91,7 +91,6 @@
 	RegisterSignal(src, COMSIG_LIVING_MOB_BUMPED, PROC_REF(handle_bumped))
 	// Be annoyed if helped
 	RegisterSignal(src, COMSIG_CARBON_HELP_ACT, PROC_REF(handle_helped))
-
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/carbon/human/npc/LateInitialize(mapload)
@@ -118,6 +117,7 @@
 		register_sticky_item(my_backup_weapon)
 
 /mob/living/carbon/human/npc/Destroy()
+	UnregisterSignal(src, list(COMSIG_ATOM_WAS_ATTACKED, COMSIG_LIVING_MOB_BUMPED, COMSIG_CARBON_HELP_ACT))
 	QDEL_NULL(socialrole)
 	danger_source = null
 	QDEL_NULL(afraid_of_fire)
@@ -194,14 +194,14 @@
 	if(source)
 		addtimer(CALLBACK(src, PROC_REF(face_atom), source), rand(0.3 SECONDS, 0.7 SECONDS))
 
-	var/phrase
+	var/phrase = "Wow." // TFN EDIT - found an edgecase where an npc might not have a socialrole, so this shouldnt be null
 	if (prob(50))
-		phrase = pick(socialrole.neutral_phrases)
+		phrase = pick(socialrole?.neutral_phrases) // TFN EDIT
 	else
 		if (gender == MALE)
-			phrase = pick(socialrole.male_phrases)
+			phrase = pick(socialrole?.male_phrases) // TFN EDIT
 		else
-			phrase = pick(socialrole.female_phrases)
+			phrase = pick(socialrole?.female_phrases) // TFN EDIT
 	realistic_say(phrase)
 
 /mob/living/carbon/human/npc/proc/handle_attacked(datum/source, atom/attacker, attack_flags)
@@ -215,7 +215,7 @@
 /mob/living/carbon/human/npc/proc/handle_bumped(mob/living/carbon/human/npc/source, mob/living/bumping)
 	SIGNAL_HANDLER
 
-	if (bumping.can_mobswap_with(source))
+	if (bumping.can_mobswap_with(source) && prob(25)) // TFN EDIT - npcs should stop and react more often
 		return
 
 	source.Annoy(bumping)
