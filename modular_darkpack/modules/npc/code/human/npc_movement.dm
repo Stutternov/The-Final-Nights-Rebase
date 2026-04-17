@@ -292,8 +292,9 @@
 					face_atom(resolved_danger_source)
 					GLOB.move_manager.move_to(src, resolved_danger_source, 1, cached_multiplicative_slowdown)
 
-		// Deaggro if the danger source has been beaten up
-		if (astype(resolved_danger_source, /mob/living).stat > UNCONSCIOUS)
+		// Deaggro if the danger source was nulled, deleted, or beaten unconscious
+		var/mob/living/dangerous_person = resolved_danger_source
+		if (!dangerous_person || dangerous_person.stat > UNCONSCIOUS) // TFN EDIT
 			end_combat()
 
 		// Deaggro if 30 second have passed since being antagonised

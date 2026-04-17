@@ -473,13 +473,6 @@
 	name = "cute dress"
 	desc = "A cute dress."
 	icon_state = "strawberrylolita"
-	LCU_UNDER_ICONS
-
-/obj/item/clothing/under/vampire/dress/novella
-	name = "luxury silk dress shirt"
-	desc = "An elegant silk dress shirt."
-	icon_state = "novella"
-	LCU_UNDER_ICONS
 
 /obj/item/clothing/under/vampire/dress/laceblack
 	name = "lace dress"

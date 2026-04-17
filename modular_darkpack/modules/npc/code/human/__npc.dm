@@ -109,12 +109,12 @@
 		if(istype(my_weapon, /obj/item/gun/ballistic))
 			RegisterSignal(my_weapon, COMSIG_GUN_FIRED, PROC_REF(handle_gun))
 			RegisterSignal(my_weapon, COMSIG_GUN_EMPTY, PROC_REF(handle_empty_gun))
-		register_sticky_item(my_weapon)
+		// register_sticky_item(my_weapon) // TFN EDIT - REMOVAL
 
 	if (my_backup_weapon_type)
 		my_backup_weapon = new my_backup_weapon_type(src)
 		equip_to_appropriate_slot(my_backup_weapon)
-		register_sticky_item(my_backup_weapon)
+		// register_sticky_item(my_backup_weapon) // TFN EDIT - REMOVAL
 
 /mob/living/carbon/human/npc/Destroy()
 	UnregisterSignal(src, list(COMSIG_ATOM_WAS_ATTACKED, COMSIG_LIVING_MOB_BUMPED, COMSIG_CARBON_HELP_ACT))
@@ -136,13 +136,14 @@
 	SShumannpcpool.try_repopulate()
 	return ..()
 
+/* // TFN EDIT REMOVAL START
 //====================Sticky Item Handling====================
 /mob/living/carbon/human/npc/proc/register_sticky_item(obj/item/my_item)
 	ADD_TRAIT(my_item, TRAIT_NODROP, NPC_ITEM_TRAIT)
 	if(!drop_on_death_list?.len)
 		drop_on_death_list = list()
 	drop_on_death_list += my_item
-
+*/ // TFN EDIT REMOVAL END
 /mob/living/carbon/human/npc/death(gibbed)
 	. = ..()
 
