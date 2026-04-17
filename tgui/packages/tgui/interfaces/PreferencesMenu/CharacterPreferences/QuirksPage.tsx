@@ -21,7 +21,7 @@ import {
 import { useRandomToggleState } from '../useRandomToggleState';
 import { useServerPrefs } from '../useServerPrefs';
 import { getRandomization, PreferenceList } from './MainPage';
-import { PersonalityPage } from './PersonalityPage';
+// import { PersonalityPage } from './PersonalityPage';
 
 function getColorValueClass(quirk: Quirk) {
   if (quirk.value > 0) {
