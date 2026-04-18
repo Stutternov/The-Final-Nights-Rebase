@@ -108,7 +108,6 @@
 	bumper_text = "aura reading"
 	difficulty = 8
 	applicable_stats = list(STAT_PERCEPTION, STAT_EMPATHY)
-	numerical = TRUE
 	roll_output_type = ROLL_PRIVATE
 
 //AURA PERCEPTION
