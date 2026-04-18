@@ -102,7 +102,7 @@ GLOBAL_PROTECT(mentor_href_token)
 			while(query_load_mentors.NextRow())
 				var/mentor_ckey = ckey(query_load_mentors.item[1])
 				new /datum/mentors(mentor_ckey)
-		qdel(query_load_mentors)
+		QDEL_NULL(query_load_mentors)
 
 	if(dbfail)
 		var/backup_file = file2text("data/mentors_backup.json")
