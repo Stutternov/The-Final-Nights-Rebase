@@ -306,7 +306,7 @@
 
 		// DARKPACK EDIT ADDITION START
 		if(visible_message_flags & EMOTE_MESSAGE)
-			message = span_emote("<b>[GET_GUESTBOOK_NAME(hearing_mob, src)]</b>[space][raw_msg]")
+			message = span_emote("<b>[GET_GUESTBOOK_NAME(hearing_mob, src)]</b>[space][raw_msg]") // TFN EDIT, ORIGINAL: message = span_emote("<b>[GET_GUESTBOOK_NAME(hearing_mob, src)]</b>[space][message]")
 		// DARKPACK EDIT ADDITION END
 
 		//This entire if/else chain could be in two lines but isn't for readibilties sake.
@@ -383,7 +383,7 @@
 			continue
 		// DARKPACK EDIT ADDITION START
 		if(audible_message_flags & EMOTE_MESSAGE)
-			message = span_emote("<b>[GET_GUESTBOOK_NAME(hearing_mob, src)]</b>[space][raw_msg]")
+			message = span_emote("<b>[GET_GUESTBOOK_NAME(hearing_mob, src)]</b>[space][raw_msg]") // TFN EDIT, ORIGINAL: message = span_emote("<b>[GET_GUESTBOOK_NAME(hearing_mob, src)]</b>[space][message]")
 		// DARKPACK EDIT ADDITION END
 		if(audible_message_flags & EMOTE_MESSAGE && runechat_prefs_check(hearing_mob, audible_message_flags) && !HAS_TRAIT(hearing_mob, TRAIT_DEAF))
 			hearing_mob.create_chat_message(src, raw_message = raw_msg, runechat_flags = audible_message_flags)

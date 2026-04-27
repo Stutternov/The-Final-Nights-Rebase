@@ -71,11 +71,11 @@
 		if(isnull(ghost.client) || isnewplayer(ghost))
 			continue
 		if((ghost.client?.prefs.chat_toggles & CHAT_GHOSTSIGHT))
-			subtle_message = span_subtle("<b>[GET_GUESTBOOK_NAME(ghost, user)]</b>[space]<i>[user.apply_message_emphasis(subtle_message)]</i>")
+			subtle_message = span_subtle("<b>[GET_GUESTBOOK_NAME(ghost, user)]</b>[space]<i>[user.apply_message_emphasis(subtle_emote)]</i>") // TFN EDIT, ORIGINAL: subtle_message = subtle_message = span_subtle("<b>[GET_GUESTBOOK_NAME(ghost, user)]</b>[space]<i>[user.apply_message_emphasis(subtle_message)]</i>")
 			to_chat(ghost, "[FOLLOW_LINK(ghost, user)] [subtle_message]")
 
 	for(var/mob/receiver in viewers)
-		subtle_message = span_subtle("<b>[GET_GUESTBOOK_NAME(receiver, user)]</b>[space]<i>[user.apply_message_emphasis(subtle_message)]</i>")
+		subtle_message = span_subtle("<b>[GET_GUESTBOOK_NAME(receiver, user)]</b>[space]<i>[user.apply_message_emphasis(subtle_emote)]</i>") // TFN EDIT, ORIGINAL: subtle_message = span_subtle("<b>[GET_GUESTBOOK_NAME(receiver, user)]</b>[space]<i>[user.apply_message_emphasis(subtle_message)]</i>")
 		receiver.show_message(subtle_message, alt_msg = subtle_message)
 		// Optional sound notification
 		if(!isobserver(receiver))

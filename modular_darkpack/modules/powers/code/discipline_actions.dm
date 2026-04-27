@@ -26,6 +26,12 @@
 
 	register_to_availability_signals()
 
+// TFN EDIT START
+/datum/action/discipline/Destroy()
+	QDEL_NULL(discipline)
+	return ..()
+// TFN EDIT END
+
 /datum/action/discipline/Remove(mob/owner)
 	if(discipline)
 		discipline.post_loss()
