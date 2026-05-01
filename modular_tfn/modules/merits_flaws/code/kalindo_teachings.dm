@@ -1,4 +1,4 @@
-/datum/quirk/darkpack/kalindo_teachings
+/datum/quirk/darkpack/kailindo_teachings
 	name = "Kailindo Martial Artist"
 	desc = "A martial art created by the Zephyr Stargazers to take advantage of Garou's shapeshifting abilities. It beganas an attempt to develop a form of non-lethal ritual combat to stem savage, and often fatal, infighting among septmates. In this respect, Kailindo failed as few maintain the temperment needed. There are few Kailindorani outside of the Stargazers, but this art remains potent even if rare."
 	value = 2
@@ -9,7 +9,7 @@
 	icon = FA_ICON_SCROLL
 	var/minimum_brawl	//Forces you to have at least 4 brawl to get this.
 
-/datum/quirk/darkpack/kalindo_teachings/add_to_holder(mob/living/new_holder, quirk_transfer, client/client_source, unique, announce)
+/datum/quirk/darkpack/kailindo_teachings/add_to_holder(mob/living/new_holder, quirk_transfer, client/client_source, unique, announce)
 	. = ..()
 	if(. == FALSE)
 		return

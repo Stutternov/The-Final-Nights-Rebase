@@ -87,12 +87,12 @@
 		icon_state = initial(icon_state)
 
 // Purely for debugging purposes
-/obj/item/book/granter/martial/kalindo
+/obj/item/book/granter/martial/kailindo
 	martial = /datum/martial_art/darkpack_kailindo
 	name = "dog scroll"
 	martial_name = "kailindo"
 	desc = "An old scrap of paper illustrating garou doing flying-side kicks.."
-	greet = span_bolddanger("You have learned the basics of Kalindo")
+	greet = span_bolddanger("You have learned the basics of Kailindo")
 	icon = 'icons/obj/scrolls.dmi'
 	icon_state ="sparringcontract"
 	remarks = list(
@@ -102,7 +102,7 @@
 		"Wow.. this is all Korean, Japanese, and action-movie moves..",
 	)
 
-/obj/item/book/granter/martial/kalindo/update_appearance(updates)
+/obj/item/book/granter/martial/kailindo/update_appearance(updates)
 	. = ..()
 	if(uses <= 0)
 		qdel(src)	//Deletes them to reduce clutter

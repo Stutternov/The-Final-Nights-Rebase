@@ -5,8 +5,8 @@
 #define WHIRLWIND "HHG"
 
 /datum/martial_art/darkpack_kailindo
-	name = "Kalindo"
-	id = MARTIALART_DARKPACK_KALINDO
+	name = "Kailindo"
+	id = MARTIALART_DARKPACK_KAILINDO
 	help_verb = /mob/living/proc/kailindo_help
 	display_combos = TRUE
 	var/datum/storyteller_roll/brawl_dex/dex_attack
@@ -160,7 +160,7 @@
 			defender.apply_damage(20, BRUTE, affecting, wound_bonus = 20)
 
 	defender.drop_all_held_items()
-	log_combat(attacker, defender, "Binding Winded (Kalindo)")
+	log_combat(attacker, defender, "Binding Winded (Kailindo)")
 	return TRUE
 
 // Tornado Kick - semi-based off Sleeping Carp's dropkick
@@ -208,7 +208,7 @@
 		else
 			defender.apply_damage(20, STAMINA)
 
-	log_combat(attacker, defender, "Binding Winded (Kalindo)")
+	log_combat(attacker, defender, "Binding Winded (Kailindo)")
 	return TRUE
 
 // Whirlwind
