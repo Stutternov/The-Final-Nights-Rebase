@@ -43,7 +43,7 @@
 	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
 		to_chat(attacker, span_warning("You cannot be in this form to use this martial art!"))
 		reset_streak()
-		deactivate_style()
+		deactivate_style(attacker)
 		return
 
 	if(findtext(streak,LAUNCH_KICK_COMBO))
@@ -83,6 +83,8 @@
 /datum/martial_art/darkpack_kungfu/proc/drop_kick(mob/living/attacker, mob/living/defender)
 	attacker.do_attack_animation(defender, ATTACK_EFFECT_KICK)
 	playsound(attacker, 'modular_tfn/modules/martial_arts/sounds/roundhousekick.ogg', 50, TRUE, -1)
+	if(!str_attack)
+		str_attack = new()
 	str_attack.difficulty = 7
 	var/kickpower = str_attack.st_roll(attacker, defender)
 	if(defender.body_position == STANDING_UP && (kickpower >= 0) && !iscrinos(defender))		//If crinos, they don't get knocked down
@@ -110,6 +112,8 @@
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
+	if(!str_attack)
+		str_attack = new()
 	str_attack.difficulty = 8
 	var/roll_success = str_attack.st_roll(attacker, defender)
 	if(roll_success)

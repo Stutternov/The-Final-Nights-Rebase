@@ -44,7 +44,7 @@
 	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
 		to_chat(attacker, span_warning("You cannot be in this form to use this martial art!"))
 		reset_streak()
-		deactivate_style()
+		deactivate_style(attacker)
 		return
 
 	if(findtext(streak, SLAM_COMBO))
@@ -82,9 +82,14 @@
 	defender.apply_damage(10, BRUTE)
 	if(!iscrinos(defender))	//We check if defender is crinos. If they are? No knockdown; only a stun which you roll.
 		defender.Knockdown(3 SECONDS)
+
+	if(!stam_defend)
+		stam_defend = new()
 	stam_defend.difficulty = (attacker.st_get_stat(STAT_STRENGTH) + attacker.st_get_stat(STAT_BRAWL))
-	var/stun_time = str_attack.st_roll(attacker, defender)
 	var/defended_time = stam_defend.st_roll(defender, attacker)
+	if(!str_attack)
+		str_attack = new()
+	var/stun_time = str_attack.st_roll(attacker, defender)
 	stun_time = clamp((stun_time-defended_time), 0, 10)
 	defender.Paralyze(stun_time SECONDS)
 	log_combat(attacker, defender, "slammed (CQB)")

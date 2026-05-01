@@ -70,8 +70,8 @@
 // Deceptive Wind
 // Described in player guide as a surprise blow, acting like a spring-coil attack via a feint and kick to the side.
 /datum/martial_art/darkpack_kailindo/proc/deceptive_wind(mob/living/attacker, mob/living/defender)
-
 	attacker.do_attack_animation(defender, ATTACK_EFFECT_KICK)
+	jump_animation(attacker)	//To feint and hit you'd have to get some air-time; looks cooler anyway.
 	var/atom/throw_target = get_edge_target_turf(defender, attacker.dir)
 	var/throw_distance = clamp((attacker.st_get_stat(STAT_STRENGTH) - defender.st_get_stat(STAT_STAMINA)), 1, 3)
 
@@ -98,7 +98,7 @@
 		if(isglabro(attacker))
 			defender.throw_at(throw_target, throw_distance + 1, 2, attacker)
 			defender.apply_damage(20, attacker.get_attack_type(), BODY_ZONE_CHEST)
-			defender.Knockdown(1 SECONDS)
+			defender.Knockdown(2 SECONDS)
 			defender.apply_damage(25, STAMINA)
 		else
 			defender.throw_at(throw_target, throw_distance, 2, attacker)
@@ -106,6 +106,11 @@
 			defender.apply_damage(20, STAMINA)
 	log_combat(attacker, defender, "Deceptive Winded (Kailindo)")
 	return TRUE
+
+/datum/martial_art/darkpack_kailindo/proc/jump_animation(mob/user)
+	var/original_transform = user.transform
+	animate(user, transform = user.transform.Translate(0, 4), time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+	animate(transform = original_transform, time = 0.1 SECONDS)
 
 // Binding Wind - Based off sleeping carp's wrist-lock w/ modifications.
 // Described in player guide as catching opponent by the wrist, using momentum to immobilize/disarm, and does non-agg damage.
@@ -132,7 +137,9 @@
 		defender.apply_damage(20, BRUTE, affecting, wound_bonus = 50)
 
 		//Bonus roll for maximum damage; does another hit to their, idealy, neck and pins.
-		dex_attack.difficulty = 6
+		if(!dex_attack)
+			dex_attack = new()
+		dex_attack.difficulty = defender.st_get_stat(STAT_DEXTERITY)
 		var/roll_success = dex_attack.st_roll(attacker, defender)
 		if(roll_success)
 			attacker.do_attack_animation(defender, ATTACK_EFFECT_BITE)	//Another one....
@@ -164,6 +171,7 @@
 // Described in player guide as an incredibly speedy spinning back-kick such as in Tai Kwon Do. Disorients and knocks back a slight bit.
 /datum/martial_art/darkpack_kailindo/proc/tornado_kick(mob/living/attacker, mob/living/defender)
 	attacker.do_attack_animation(defender, ATTACK_EFFECT_KICK)
+	attacker.emote("spin")	//SPIIIIIIN!!
 	defender.visible_message(
 			span_danger("[attacker] spins around and kicks [defender] in the head!"),
 			span_userdanger("[attacker] spins and kicks you in the side of the head!"),
@@ -182,7 +190,9 @@
 		defender.adjust_eye_blur_up_to(3 SECONDS, 3 SECONDS)
 		defender.throw_at(throw_target, 2, 2, attacker)
 		//Bonus roll for maximum damage; does another hit to their, idealy, neck and pins.
-		dex_attack.difficulty = 6
+		if(!dex_attack)
+			dex_attack = new()
+		dex_attack.difficulty = defender.st_get_stat(STAT_STAMINA)
 		var/roll_success = dex_attack.st_roll(attacker, defender)
 		if(roll_success)
 			defender.apply_damage(40, STAMINA)
@@ -220,17 +230,22 @@
 			null,
 			attacker,
 	)
+	to_chat(attacker, span_danger("unleash a furry of punches into [defender]!"))
 
-	//We allow as many attacks as you have successes past the difficulty of 6.
-	dex_attack.difficulty = 6
-	var/successes = dex_attack.st_roll(attacker, defender)
+	var/successes
+	if(!dex_attack)
+		dex_attack = new()
+	dex_attack.difficulty = defender.st_get_stat(STAT_DEXTERITY)
+	successes = dex_attack.st_roll(attacker, defender)
 	if(iscrinos(attacker))
-		successes += 1
+		successes += 1	//Mild bonus to Crinos, you're larger so harder to do this but raw power.
+	if(isglabro(attacker))
+		successes += 2	//More notable bonus for Galbro, gives an encouragement to not go beast-mode + you're not huge so more nimble still.
 	var/armor_block = defender.run_armor_check(BODY_ZONE_CHEST, MELEE)
-	var/total_damage = str_attack.st_roll(attacker, defender)	//Brawl + strength, should cap at ~15
-	total_damage = clamp((total_damage * 2), 0, 30)				//We times by 2, should cap at ~30
-	defender.apply_damage(total_damage * successes, attacker.get_attack_type(), BODY_ZONE_CHEST, blocked = armor_block)
-	defender.apply_damage(total_damage * successes, STAMINA)
+	//var/total_damage = str_attack.st_roll(attacker, defender)	//Brawl + strength, should cap at ~10 normally
+	//total_damage = clamp((total_damage * 2), 0, 30)				//We times by 2, should cap at ~20 normally. 22 for Galbro, 24 for war-form.
+	defender.apply_damage(20 * successes, attacker.get_attack_type(), BODY_ZONE_CHEST, blocked = armor_block)
+	defender.apply_damage(20 * successes, STAMINA)
 	defender.adjust_eye_blur_up_to(successes SECONDS, 10 SECONDS)
 
 	return TRUE
@@ -305,8 +320,6 @@
 		return FALSE
 	if(!isturf(user.loc)) //NO MOTHERFLIPPIN MECHS!
 		return FALSE
-	if(iscrinos(user)) //NO CRINOS DODGING!
-		return FALSE
 	return TRUE
 
 /* This is a unique type of dodging, it goes as follows:
@@ -316,6 +329,8 @@
 */
 /datum/martial_art/darkpack_kailindo/proc/check_dodge_parry(mob/living/user, atom/movable/hitby, damage, attack_text, attack_type, ...)
 	SIGNAL_HANDLER
+	if(iscrinos(user))				 //NO CRINOS DODGING!
+		return FALSE
 	var/determine_avoidance = ((user.st_get_stat(STAT_ATHLETICS) + user.st_get_stat(STAT_DEXTERITY) + user.st_get_stat(STAT_BRAWL))) //Theoretically caps at roughly 15%, bit higher for Galbro
 	if(islupus(user))
 		determine_avoidance *= 2	//This can stack with throw mode. Should be about 30% base, 60% on throw.

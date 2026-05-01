@@ -43,7 +43,7 @@
 	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
 		to_chat(attacker, span_warning("You cannot be in this form to use this martial art!"))
 		reset_streak()
-		deactivate_style()
+		deactivate_style(attacker)
 		return
 
 	if(findtext(streak,UPPERCUT_COMBO))
@@ -96,6 +96,8 @@
 	defender.visible_message(span_warning("[attacker] rapidly jabs [defender]'s head!"), \
 				span_userdanger("You are jabbed in the head by [attacker], leaving you disoriented!"), span_hear("You hear a sickening sound of knuckles hitting flesh!"), COMBAT_MESSAGE_RANGE, attacker)
 	defender.adjust_stamina_loss(45)
+	if(!dex_attack)
+		dex_attack = new()
 	dex_attack.difficulty = 5
 	var/roll_success = dex_attack.st_roll(attacker, defender)
 	var/armor_block = defender.run_armor_check(attacker.zone_selected, MELEE)
@@ -132,8 +134,9 @@
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
-	dex_attack.difficulty = 6
-
+	if(!dex_attack)
+		dex_attack = new()
+	dex_attack.difficulty = defender.st_get_stat(STAT_STAMINA)
 	var/roll_success = dex_attack.st_roll(attacker, defender)
 	if(roll_success)	//If success, stun + knockdown and damage. If no success, only the damage.
 		if(ishuman(defender))
