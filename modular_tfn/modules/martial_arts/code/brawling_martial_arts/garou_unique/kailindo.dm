@@ -24,12 +24,12 @@
 			if(!istype(limb, /obj/item/bodypart/arm) && !istype(limb, /obj/item/bodypart/leg))
 				continue
 
+			LAZYADD(affected_bodyparts, limb)
+
 			limb.unarmed_damage_low += 5
 			limb.unarmed_damage_high += 5
 			//We remove Crinos from having agg damage; instead they get meatier combos and the bonus raw damage to punches.
 			limb.attack_type = BRUTE
-
-			LAZYADD(affected_bodyparts, limb)
 
 /datum/martial_art/darkpack_kailindo/deactivate_style(mob/living/remove_from)
 	UnregisterSignal(remove_from, list(COMSIG_LIVING_CHECK_BLOCK))
@@ -39,6 +39,8 @@
 /datum/martial_art/darkpack_kailindo/proc/check_form(mob/living/carbon/attacker)
 	if(iscrinos(attacker))	//Removes agg damage fallback
 		for(var/obj/item/bodypart/limb as anything in attacker.bodyparts)
+			if(!istype(limb, /obj/item/bodypart/arm) && !istype(limb, /obj/item/bodypart/leg))
+				continue
 			limb.attack_type = BRUTE
 	if(islupus(attacker))	//Prevents combo-gain; you shouldn't be doing combos
 		return
@@ -68,8 +70,6 @@
 // Deceptive Wind
 // Described in player guide as a surprise blow, acting like a spring-coil attack via a feint and kick to the side.
 /datum/martial_art/darkpack_kailindo/proc/deceptive_wind(mob/living/attacker, mob/living/defender)
-	if(!iscarbon(defender))
-		return FALSE
 
 	attacker.do_attack_animation(defender, ATTACK_EFFECT_KICK)
 	var/atom/throw_target = get_edge_target_turf(defender, attacker.dir)
@@ -110,9 +110,6 @@
 // Binding Wind - Based off sleeping carp's wrist-lock w/ modifications.
 // Described in player guide as catching opponent by the wrist, using momentum to immobilize/disarm, and does non-agg damage.
 /datum/martial_art/darkpack_kailindo/proc/binding_wind(mob/living/attacker, mob/living/defender)
-	if(!iscarbon(defender))
-		return FALSE
-
 	// Determine if our target has a functioning active arm. If not, return.
 	var/obj/item/bodypart/affecting = defender.get_active_hand()
 	if(!affecting)
@@ -166,9 +163,6 @@
 // Tornado Kick - semi-based off Sleeping Carp's dropkick
 // Described in player guide as an incredibly speedy spinning back-kick such as in Tai Kwon Do. Disorients and knocks back a slight bit.
 /datum/martial_art/darkpack_kailindo/proc/tornado_kick(mob/living/attacker, mob/living/defender)
-	if(!iscarbon(defender))
-		return FALSE
-
 	attacker.do_attack_animation(defender, ATTACK_EFFECT_KICK)
 	defender.visible_message(
 			span_danger("[attacker] spins around and kicks [defender] in the head!"),
@@ -214,9 +208,6 @@
 // Whirlwind
 // Described in player guide as a flurry of attacks within one turn; we instead make it like throwing rapid succession hits based on successes of dice rolling.
 /datum/martial_art/darkpack_kailindo/proc/whirlwind(mob/living/attacker, mob/living/defender)
-	if(!iscarbon(defender))
-		return FALSE
-
 	if(iscrinos(attacker))
 		attacker.do_attack_animation(defender, ATTACK_EFFECT_SLASH)
 	if(!iscrinos(attacker))
@@ -244,6 +235,80 @@
 
 	return TRUE
 
+/datum/martial_art/darkpack_kailindo/grab_act(mob/living/attacker, mob/living/defender)
+	if(defender.check_block(attacker, 0, "[attacker]'s grab", UNARMED_ATTACK))
+		return MARTIAL_ATTACK_FAIL
+
+	add_to_streak("G", defender)
+	if(check_streak(attacker, defender))
+		return MARTIAL_ATTACK_SUCCESS
+	defender.apply_damage(15, STAMINA)
+	return MARTIAL_ATTACK_INVALID //Boxing is not known for holds
+
+/datum/martial_art/darkpack_kailindo/harm_act(mob/living/attacker, mob/living/defender)
+	if(defender.check_block(attacker, 10, attacker.name, UNARMED_ATTACK))
+		return MARTIAL_ATTACK_FAIL
+
+	add_to_streak("H", defender)
+	if(check_streak(attacker, defender))
+		return MARTIAL_ATTACK_SUCCESS
+
+	return MARTIAL_ATTACK_INVALID //You're gonna punch someone in the face normally and like it
+
+/datum/martial_art/darkpack_kailindo/disarm_act(mob/living/attacker, mob/living/defender)
+	if(!can_deflect(attacker)) //you arent swiping at someone on the ground
+		return MARTIAL_ATTACK_INVALID
+	if(defender.check_block(attacker, 0, attacker.name, UNARMED_ATTACK))
+		return MARTIAL_ATTACK_FAIL
+
+	add_to_streak("D", defender)
+	if(check_streak(attacker, defender))
+		return MARTIAL_ATTACK_SUCCESS
+	//playsound(defender, 'modular_tfn/modules/martial_arts/sounds/swipe.ogg', 25, TRUE, -1) SFX didnt feel good using it
+	defender.apply_damage(20, STAMINA)
+	return MARTIAL_ATTACK_INVALID //Essentially taking a swipe at their face
+
+/datum/martial_art/darkpack_kailindo/proc/dodge_animation(mob/living/user)
+	var/new_pixel_x
+	var/new_pixel_y
+	var/userdir = user.dir
+	switch(userdir)
+		if(EAST)
+			new_pixel_x = rand(-16, -8)
+			new_pixel_y = rand(-24, 24)
+		if(WEST)
+			new_pixel_x = rand(8, 16)
+			new_pixel_y = rand(-24, 24)
+		if(NORTH)
+			new_pixel_x = rand(-16,16)
+			new_pixel_y = rand(-16, -8)
+		if(SOUTH)
+			new_pixel_x = rand(-16,16)
+			new_pixel_y = rand(8, 16)
+	animate(user, alpha = 200, pixel_x = new_pixel_x, pixel_y = new_pixel_y, time = 0.2 SECONDS)
+
+/datum/martial_art/darkpack_kailindo/proc/reset_animation(mob/living/user, fadein)
+	if(fadein)
+		animate(user, alpha = 225, time = 0.1 SECONDS)
+		return
+	else
+		animate(user, alpha = 225, pixel_x = 0, pixel_y = 0, time = 0.1 SECONDS)
+
+/datum/martial_art/darkpack_kailindo/proc/can_deflect(mob/living/user)
+	if(!can_use(user) || !user.combat_mode)
+		return FALSE
+	if(INCAPACITATED_IGNORING(user, INCAPABLE_GRAB)) //NO STUN
+		return FALSE
+	if(!(user.mobility_flags & MOBILITY_USE)) //IF YOU CANT MOVE, YOU CANT DODGE
+		return FALSE
+	if(HAS_TRAIT(user, TRAIT_HULK)) //NO HULK
+		return FALSE
+	if(!isturf(user.loc)) //NO MOTHERFLIPPIN MECHS!
+		return FALSE
+	if(iscrinos(user)) //NO CRINOS DODGING!
+		return FALSE
+	return TRUE
+
 /* This is a unique type of dodging, it goes as follows:
 - Humans and Galbro get normal dodge chances to melee and unarmed attacks, akin to street-boxing though to a lower level
 - Crinos get no dodge bonus
@@ -251,9 +316,6 @@
 */
 /datum/martial_art/darkpack_kailindo/proc/check_dodge_parry(mob/living/user, atom/movable/hitby, damage, attack_text, attack_type, ...)
 	SIGNAL_HANDLER
-	if(!can_deflect(user))
-		return
-
 	var/determine_avoidance = ((user.st_get_stat(STAT_ATHLETICS) + user.st_get_stat(STAT_DEXTERITY) + user.st_get_stat(STAT_BRAWL))) //Theoretically caps at roughly 15%, bit higher for Galbro
 	if(islupus(user))
 		determine_avoidance *= 2	//This can stack with throw mode. Should be about 30% base, 60% on throw.
@@ -286,47 +348,6 @@
 	addtimer(CALLBACK(src, PROC_REF(reset_animation), dodger, FALSE), 0.1 SECONDS)
 
 	return SUCCESSFUL_BLOCK
-
-/datum/martial_art/darkpack_kailindo/proc/reset_animation(mob/living/user, fadein)
-	if(fadein)
-		animate(user, alpha = 225, time = 0.1 SECONDS)
-		return
-	else
-		animate(user, alpha = 225, pixel_x = 0, pixel_y = 0, time = 0.1 SECONDS)
-
-/datum/martial_art/darkpack_kailindo/proc/dodge_animation(mob/living/user)
-	var/new_pixel_x
-	var/new_pixel_y
-	var/userdir = user.dir
-	switch(userdir)
-		if(EAST)
-			new_pixel_x = rand(-16, -8)
-			new_pixel_y = rand(-24, 24)
-		if(WEST)
-			new_pixel_x = rand(8, 16)
-			new_pixel_y = rand(-24, 24)
-		if(NORTH)
-			new_pixel_x = rand(-16,16)
-			new_pixel_y = rand(-16, -8)
-		if(SOUTH)
-			new_pixel_x = rand(-16,16)
-			new_pixel_y = rand(8, 16)
-	animate(user, alpha = 200, pixel_x = new_pixel_x, pixel_y = new_pixel_y, time = 0.2 SECONDS)
-
-/datum/martial_art/darkpack_kailindo/proc/can_deflect(mob/living/user)
-	if(!can_use(user) || !user.combat_mode)
-		return FALSE
-	if(INCAPACITATED_IGNORING(user, INCAPABLE_GRAB)) //NO STUN
-		return FALSE
-	if(!(user.mobility_flags & MOBILITY_USE)) //IF YOU CANT MOVE, YOU CANT DODGE
-		return FALSE
-	if(HAS_TRAIT(user, TRAIT_HULK)) //NO HULK
-		return FALSE
-	if(!isturf(user.loc)) //NO MOTHERFLIPPIN MECHS!
-		return FALSE
-	if(iscrinos(user)) //NO CRINOS DODGING!
-		return FALSE
-	return TRUE
 
 /mob/living/proc/kailindo_help()
 	set name = "Recall Teachings"
