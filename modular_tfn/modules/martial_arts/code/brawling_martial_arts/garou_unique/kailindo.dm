@@ -90,6 +90,8 @@
 		defender.throw_at(throw_target, throw_distance + 2, 2, attacker, spin = TRUE)
 		defender.apply_damage(30, attacker.get_attack_type(), BODY_ZONE_CHEST)
 		defender.apply_damage(30, STAMINA)
+		if(!knockdown_check)
+			knockdown_check = new()
 		knockdown_check.difficulty = (attacker.st_get_stat(STAT_STRENGTH) + attacker.st_get_stat(STAT_BRAWL))
 		var/defended_time = knockdown_check.st_roll(defender, attacker)
 		var/knockdown_time = clamp((10 - defended_time), 0, 10)
@@ -131,7 +133,7 @@
 		null,
 		attacker,
 		)
-		to_chat(attacker, span_danger("You violently twist and rips at [defender]'s [affecting]!"))
+		to_chat(attacker, span_danger("You violently twist and rip at [defender]'s [affecting]!"))
 		playsound(defender, 'sound/items/weapons/slice.ogg', 25, TRUE, -1)
 
 		defender.apply_damage(20, BRUTE, affecting, wound_bonus = 50)

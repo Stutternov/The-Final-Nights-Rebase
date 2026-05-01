@@ -32,7 +32,6 @@
 /datum/martial_art/darkpack_cqb/deactivate_style(mob/living/remove_from)
 	return ..()
 
-
 /datum/martial_art/darkpack_cqb/reset_streak(mob/living/new_target)
 	if(!IS_WEAKREF_OF(new_target, restraining_mob))
 		restraining_mob = null
@@ -42,9 +41,7 @@
 
 	//If in various forms, we force a deactivate as a fail-safe.
 	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
-		to_chat(attacker, span_warning("You cannot be in this form to use this martial art!"))
 		reset_streak()
-		deactivate_style(attacker)
 		return
 
 	if(findtext(streak, SLAM_COMBO))
@@ -201,6 +198,9 @@
 	if(defender.check_block(attacker, 0, attacker.name, UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
+
 	add_to_streak("G", defender)
 	if(check_streak(attacker, defender)) //if a combo is made no grab upgrade is done
 		return MARTIAL_ATTACK_SUCCESS
@@ -224,6 +224,10 @@
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/darkpack_cqb/harm_act(mob/living/attacker, mob/living/defender)
+
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
+
 	if(attacker.grab_state == GRAB_KILL \
 		&& attacker.zone_selected == BODY_ZONE_HEAD \
 		&& attacker.pulling == defender \
@@ -234,6 +238,10 @@
 			if(!do_after(attacker, (20 - (attacker.st_get_stat(STAT_DEXTERITY) + attacker.st_get_stat(STAT_MEDICINE))) , defender))
 				defender.balloon_alert(attacker, "failed to necksnap!")
 				to_chat(attacker, span_warning("Your hands slip off [defender]'s neck!"))
+				return MARTIAL_ATTACK_FAIL
+			if(iscrinos(defender) && !defender.body_position == LYING_DOWN)
+				defender.balloon_alert(attacker, "failed to necksnap!")
+				to_chat(attacker, span_warning("You can't get a good grip like this on [defender]'s neck!"))
 				return MARTIAL_ATTACK_FAIL
 			var/snappower = clamp((1 + attacker.st_get_stat(STAT_STRENGTH) - defender.st_get_stat(STAT_STAMINA)), 0, 10)
 			if(snappower == 0)
@@ -302,6 +310,9 @@
 /datum/martial_art/darkpack_cqb/disarm_act(mob/living/attacker, mob/living/defender)
 	if(defender.check_block(attacker, 0, attacker.name, UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
+
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
 
 	add_to_streak("D", defender)
 	if(check_streak(attacker, defender))

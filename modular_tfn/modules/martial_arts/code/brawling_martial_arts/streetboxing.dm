@@ -41,9 +41,7 @@
 
 	//If in various forms, we force a deactivate as a fail-safe.
 	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
-		to_chat(attacker, span_warning("You cannot be in this form to use this martial art!"))
 		reset_streak()
-		deactivate_style(attacker)
 		return
 
 	if(findtext(streak,UPPERCUT_COMBO))
@@ -164,6 +162,9 @@
 	if(defender.check_block(attacker, 0, "[attacker]'s grab", UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
+
 	add_to_streak("G", defender)
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
@@ -173,6 +174,9 @@
 /datum/martial_art/darkpack_boxing/harm_act(mob/living/attacker, mob/living/defender)
 	if(defender.check_block(attacker, 10, attacker.name, UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
+
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
 
 	add_to_streak("H", defender)
 	if(check_streak(attacker, defender))
@@ -185,6 +189,9 @@
 		return MARTIAL_ATTACK_INVALID
 	if(defender.check_block(attacker, 0, attacker.name, UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
+
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
 
 	add_to_streak("D", defender)
 	if(check_streak(attacker, defender))
@@ -252,6 +259,9 @@
 /// Like the hit game "Punch Out!!" (1984) you can dodge incoming punches thrown at you. Melee weapons and projectiles? not so lucky
 /datum/martial_art/darkpack_boxing/proc/check_dodge(mob/living/user, atom/movable/hitby, damage, attack_text, attack_type, ...)
 	SIGNAL_HANDLER
+
+	if(iscrinos(user) || ishispo(user) || islupus(user) || !iscarbon(user))
+		return NONE
 
 	var/determine_avoidance = ((user.st_get_stat(STAT_ATHLETICS) + user.st_get_stat(STAT_DEXTERITY) + user.st_get_stat(STAT_BRAWL)) * 2) //Theoretical max of 40% with Cel 5
 

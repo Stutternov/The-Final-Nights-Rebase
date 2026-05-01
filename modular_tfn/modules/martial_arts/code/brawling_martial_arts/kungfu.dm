@@ -41,9 +41,7 @@
 
 	//If in various forms, we force a deactivate as a fail-safe.
 	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
-		to_chat(attacker, span_warning("You cannot be in this form to use this martial art!"))
 		reset_streak()
-		deactivate_style(attacker)
 		return
 
 	if(findtext(streak,LAUNCH_KICK_COMBO))
@@ -133,6 +131,9 @@
 	if(defender.check_block(attacker, 0, "[attacker]'s grab", UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
+
 	add_to_streak("G", defender)
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
@@ -148,6 +149,9 @@
 	if(defender.check_block(attacker, 10, attacker.name, UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
+
 	add_to_streak("H", defender)
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
@@ -159,6 +163,9 @@
 		return MARTIAL_ATTACK_INVALID
 	if(defender.check_block(attacker, 0, attacker.name, UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
+
+	if(iscrinos(attacker) || ishispo(attacker) || islupus(attacker) || !iscarbon(attacker))
+		return MARTIAL_ATTACK_INVALID
 
 	add_to_streak("D", defender)
 	if(check_streak(attacker, defender))
@@ -193,6 +200,9 @@
 /datum/martial_art/darkpack_kungfu/proc/hit_by_projectile(mob/living/user, obj/projectile/hitting_projectile, def_zone)
 	SIGNAL_HANDLER
 
+	if(iscrinos(user) || ishispo(user) || islupus(user) || !iscarbon(user))
+		return NONE
+
 	if(!user.is_clan(/datum/subsplat/vampire_clan/true_brujah))
 		return NONE //No, you cant dodge bullets normally, bum
 
@@ -224,6 +234,9 @@
 /// Trained Kung-Fu practitioners can avoid melee attacks to varying levels of success, anything buffing this value above ~30% fully invested should be closed
 /datum/martial_art/darkpack_kungfu/proc/check_dodge(mob/living/user, atom/movable/hitby, damage, attack_text, attack_type, ...)
 	SIGNAL_HANDLER
+
+	if(iscrinos(user) || ishispo(user) || islupus(user) || !iscarbon(user))
+		return NONE
 
 	var/determine_avoidance = ((user.st_get_stat(STAT_ATHLETICS) + user.st_get_stat(STAT_DEXTERITY)))
 
