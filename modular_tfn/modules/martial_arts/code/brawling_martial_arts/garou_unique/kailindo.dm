@@ -45,7 +45,7 @@
 
 /datum/martial_art/darkpack_kailindo/proc/check_streak(mob/living/attacker, mob/living/defender)
 	// Way of checking on combo what form the attackers in; prevents lupus combos and ensures no agg damage w/ crinos
-	//check_form(attacker)
+	check_form(attacker)
 
 	if(findtext(streak,DECEPTIVE_WIND))
 		reset_streak()
