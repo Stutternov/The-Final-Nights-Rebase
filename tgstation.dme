@@ -7904,7 +7904,7 @@
 #include "modular_tfn\modules\mentor\code\mentorwho.dm"
 #include "modular_tfn\modules\merits_flaws\code\blush_of_health_quirk.dm"
 #include "modular_tfn\modules\merits_flaws\code\eat_food_quirk.dm"
-#include "modular_tfn\modules\merits_flaws\code\kalindo_teachings.dm"
+#include "modular_tfn\modules\merits_flaws\code\kailindo_teachings.dm"
 #include "modular_tfn\modules\npc\code\shipment_npcs.dm"
 #include "modular_tfn\modules\overwatch\code\overwatch.dm"
 #include "modular_tfn\modules\phones\code\endpost_announce.dm"
