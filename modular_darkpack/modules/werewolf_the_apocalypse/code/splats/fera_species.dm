@@ -312,12 +312,7 @@
 	abstract_type = /datum/movespeed_modifier/shifter
 	movetypes = GROUND
 
-// Verify these nums are ttrpg accurate.
-/datum/movespeed_modifier/shifter/war
-	multiplicative_slowdown = -0.1
-
-/datum/movespeed_modifier/shifter/dire
-	multiplicative_slowdown = -0.3
-
+// TFN EDIT REMOVE START - GAROU SPEED LORE
 /datum/movespeed_modifier/shifter/feral
-	multiplicative_slowdown = -0.5
+	multiplicative_slowdown = -0.15	//7 dex + -0.15 in movement speed comes out to roughly -0.5 total speed reduction; equal to 10 dex normally.
+// TFN EDIT REMOVE END
